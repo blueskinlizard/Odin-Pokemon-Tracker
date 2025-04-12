@@ -25,3 +25,5 @@ router.post("/addPokemon", async (req,res) =>{
         return res.status(401).json("Error adding Pokemon");
     }
 })
+
+module.exports = router;
