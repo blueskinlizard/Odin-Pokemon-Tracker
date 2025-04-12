@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { db } = require("../db/queries")
 //this file serves as a rest API for fetching and adding Pokemon Info
-router.post("/getPokemon", async (req,res) =>{
+router.get("/getPokemon", async (req,res) =>{
     try{
         const { username } = req.body; //username is provided by React Context hook
         const ownedPokemon = await db.getAllPokemon(username);
@@ -13,7 +13,14 @@ router.post("/getPokemon", async (req,res) =>{
         return res.status(401).json("Error fetching Pokemon");
     }
 })
-
+router.get("/pokemonDescription", async(req, res) =>{
+    try{
+        const { pokemonToFetch, username } = req.body;
+        const pokemonDescription = await db.getPokemonDescription(pokemonToFetch, username);
+        return res.json(pokemonDescription);
+    }
+    catch{}
+})
 router.post("/addPokemon", async (req,res) =>{
     try{
         const { pokemon, username } = req.body; //username is provided by React Context hook
