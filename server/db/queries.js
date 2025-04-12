@@ -5,16 +5,16 @@ async function getAllPokemon(userID){
     return ownedPokemon;
 }
 
-async function addPokemonUser(pokemonToAdd, userID) {
-    await pool.query("UPDATE uservalues SET pokemonOwned = array_append(pokemonOwned, $1) WHERE userID = $2", [pokemonToAdd, userID]);
+async function addPokemonUser(pokemonToAdd, username) {
+    await pool.query("UPDATE uservalues SET pokemonOwned = array_append(pokemonOwned, $1) WHERE username = $2", [pokemonToAdd, username]);
 }
 
-async function setPokemonDescription(pokemonToChange, description, userID) {
-    await pool.query("INSERT INTO pokemon_descriptions (userID, pokemonID, pokemonDescription) VALUES ($1, $2, $3)", [userID, pokemonToChange, description]);
+async function setPokemonDescription(pokemonToChange, description, username) {
+    await pool.query("INSERT INTO pokemon_descriptions (username, pokemonID, pokemonDescription) VALUES ($1, $2, $3)", [username, pokemonToChange, description]);
 }
 
-async function getPokemonDescription(pokemonToRetrieve, userID){
-    const { pokemonDescription } = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE userID = $1 AND pokemonID = $2", [userID, pokemonToRetrieve]);
+async function getPokemonDescription(pokemonToRetrieve, username){
+    const { pokemonDescription } = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE username = $1 AND pokemonID = $2", [username, pokemonToRetrieve]);
     return pokemonDescription;
 }
 async function addUser(username, password){
