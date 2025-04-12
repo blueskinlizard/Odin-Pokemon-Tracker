@@ -10,6 +10,13 @@ app.use(express.json());
 app.use("/api", loginRoutes);
 app.use("/api", pokemonRoutes);
 
+app.use(session({
+  secret: process.env.SECRET_PASSWORD,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
 app.get("/", (req, res) =>{
     res.send("Hello World!");
 })
