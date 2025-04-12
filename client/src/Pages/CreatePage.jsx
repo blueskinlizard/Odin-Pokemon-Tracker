@@ -1,0 +1,1 @@
+//This page is meant for adding a new pokemon to a user's database

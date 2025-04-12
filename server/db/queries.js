@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
-async function getAllPokemon(userID){
-    const { ownedPokemon } = await pool.query("SELECT pokemonOwned FROM uservalues WHERE userID = $1", [userID]);
+async function getAllPokemon(username){
+    const { ownedPokemon } = await pool.query("SELECT pokemonOwned FROM uservalues WHERE username = $1", [username]);
     return ownedPokemon;
 }
 
@@ -10,11 +10,11 @@ async function addPokemonUser(pokemonToAdd, username) {
 }
 
 async function setPokemonDescription(pokemonToChange, description, username) {
-    await pool.query("INSERT INTO pokemon_descriptions (username, pokemonID, pokemonDescription) VALUES ($1, $2, $3)", [username, pokemonToChange, description]);
+    await pool.query("INSERT INTO pokemon_descriptions (username, pokemonName, pokemonDescription) VALUES ($1, $2, $3)", [username, pokemonToChange, description]);
 }
 
 async function getPokemonDescription(pokemonToRetrieve, username){
-    const { pokemonDescription } = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE username = $1 AND pokemonID = $2", [username, pokemonToRetrieve]);
+    const { pokemonDescription } = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE username = $1 AND pokemonName = $2", [username, pokemonToRetrieve]);
     return pokemonDescription;
 }
 async function addUser(username, password){
@@ -29,8 +29,8 @@ async function getUserPassword(userName){
     return password;
 }
 
-async function insertPokemonAttribute(pokemonToAdd, pokemonID){
-    await pool.query("INSERT INTO pokemon_attributes (pokemonToAdd, pokemonID) VALUES ($1, $2)", [pokemonToAdd, pokemonID]);
+async function insertPokemonAttribute(pokemonToAdd, pokemonName){
+    await pool.query("INSERT INTO pokemon_attributes (pokemonToAdd, pokemonName) VALUES ($1, $2)", [pokemonToAdd, pokemonName]);
 }
 
 module.exports = {

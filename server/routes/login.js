@@ -22,7 +22,7 @@ router.post("/login", async (req, res)=>{ //login with existing account
     }
     
 })
-router.get("/currentUser", async (req, res) =>{
+router.get("/currentUser", async (req, res) =>{ //Listen, I know this is a "login" API, but I'm also including a "get current user" API because I'm lazy and don't want to make a separate file for it
     try{
         const username = req.session.username;
         return res.json({ username });
