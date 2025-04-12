@@ -26,5 +26,14 @@ async function getUserPassword(userName){
 async function insertPokemonAttribute(pokemonToAdd, pokemonID){
     await pool.query("INSERT INTO pokemon_attributes (pokemonToAdd, pokemonID) VALUES ($1, $2)", [pokemonToAdd, pokemonID]);
 }
+
+module.exports = {
+    getAllPokemon,
+    addPokemonUser,
+    setPokemonDescription,
+    getPokemonDescription,
+    getUserPassword,
+    insertPokemonAttribute
+}
 //idea is that we enter the pokemon name on the fontend, which react will try to fetch from pokemon API.
 // When fetched, we will set an image component along with the user inputted description.
