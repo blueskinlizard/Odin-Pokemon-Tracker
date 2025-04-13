@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-
+import { defaultImage } from '../assets/PokemonHomepage.png'
 
 export default function DisplayCard(props){
     const [cardImage, setCardImage] = useState();
-    useEffect(() =>{
+    useEffect(() =>{ //fetches images to corresponding pokemon provided
         const fetchImage = (async() =>{
             try{
                 const imageSource = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.name.toLowerCase()}`)
@@ -13,10 +13,11 @@ export default function DisplayCard(props){
             }
             catch(err){
                 console.log("Error fetching image, or more specifically: " +err);
+                setCardImage(defaultImage);
             }
         })
         fetchImage();
-    }, [])
+    }, [props.name])
 
     //PLACEHOLDER FOR NOW
     return(
