@@ -13,6 +13,10 @@ async function setPokemonDescription(pokemonToChange, description, username) {
     await pool.query("INSERT INTO pokemon_descriptions (username, pokemonName, pokemonDescription) VALUES ($1, $2, $3)", [username, pokemonToChange, description]);
 }
 
+async function changePokemonDescription(pokemonToChange, description, username) {
+    await pool.query( "UPDATE pokemon_descriptions SET pokemonDescription = $1 WHERE username = $2 AND pokemonName = $3", [description, username, pokemonToChange]);
+}
+
 async function getPokemonDescription(pokemonToRetrieve, username){
     const { pokemonDescription } = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE username = $1 AND pokemonName = $2", [username, pokemonToRetrieve]);
     return pokemonDescription;
@@ -42,6 +46,7 @@ module.exports = {
     insertPokemonAttribute,
     getUser,
     addUser,
+    changePokemonDescription
 }
 //idea is that we enter the pokemon name on the fontend, which react will try to fetch from pokemon API.
 // When fetched, we will set an image component along with the user inputted description.

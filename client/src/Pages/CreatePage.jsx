@@ -1,1 +1,45 @@
 //This page is meant for adding a new pokemon to a user's database
+
+export default function CreatePage(){
+
+    const addToDatabase = (async (pokemonForm) =>{
+        pokemonForm.preventDefault();
+        
+        //This function is meant to add a new pokemon to the user's database
+        try{
+            const form = pokemonForm.target;
+            const pokemonName = form.name.value;
+            const pokemonDescription = form.description.value; 
+            const response = await fetch("/api/addPokemon", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ pokemonName, pokemonDescription}),
+            })
+            const result = await response.json();
+            if(response.ok){
+                console.log("Pokemon Successfully added, more specifically: ", result.message);
+            }
+            else{
+                console.log("Error occured in adding pokemon, response !=ok, error: ", result.message)
+            }
+        }
+        catch(err){
+            console.log("Error in adding pokemon, caught error: ", err);
+        }
+        
+    })
+    return(
+        <div>
+            <h1> Add a new Pokémon to your collection! </h1>
+            <form className="CreatePokemonForm" onSubmit={addToDatabase}>
+                <label> Name: </label>
+                <input type="text" name="name" placeholder="Enter the name of the Pokémon"/>
+                <label> Description: </label>
+                <textarea name="description" placeholder="Enter a brief description of the Pokémon"/>
+                <button type="submit" className="CreatePokemonButton">Create</button>
+            </form>
+        </div>
+    )
+}

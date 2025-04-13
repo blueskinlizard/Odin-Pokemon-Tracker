@@ -10,8 +10,8 @@ router.post("/login", async (req, res)=>{ //login with existing account
         const retrievedPassword = await db.getUserPassword(username); //THIS IS A BIG SECURITY RISK!!!! I HAVE NOT ENCRYPTED THE PASSWORDS HERE!!!! 
         // DO NOT STORE YOUR REAL LIFE LOGIN INFO ON MY SITE!!!!
         if (retrievedPassword === password) {
-            res.json({ message: "Login successful" });
             req.session.username = username;
+            res.json({ message: "Login successful" });
         }
         else{
             return res.status(401).json({ message: "Invalid credentials" });

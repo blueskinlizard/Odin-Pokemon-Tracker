@@ -24,12 +24,13 @@ router.get("/pokemonDescription/:username/:pokemonToFetch", async(req, res) =>{
 })
 router.post("/addPokemon", async (req,res) =>{
     try{
-        const { pokemon, username } = req.body; //username is provided by React Context hook
-        if (!pokemon || !username) {
-            return res.status(400).json({ error: "Missing required fields: 'pokemon' or 'username'" });
+        const { pokemon, pokemonDescription } = req.body; //username is provided by React Context hook
+        if (!pokemon || !pokemonDescription) {
+            return res.status(400).json({ error: "Missing required fields: 'pokemon' or 'pokemonDescription'" });
           }
-        await db.addPokemonUser(pokemon, username);
-        console.log("Added Pokemon(s): "+pokemon+"to user:" +username);
+        await db.addPokemonUser(pokemon, req.session.username); //this adds the base pokemon to userValues database table
+        console.log("Added Pokemon(s): "+pokemon+"to user:" + req.session.username);
+        await db.setPokemonDescription(pokemon, pokemonDescription, req.session.username); //this adds the description to the pokemon_descriptions database table
         return res.status(201).json("Pokemon added")
     }
     catch(err){

@@ -1,16 +1,13 @@
-import { useEffect } from "react"
-import { DisplayCard } from "../Components/DisplayCard";
 import { PokemonHomePageImage } from "../assets/PokemonHomePageImage.png"
 export default function HomePage() {
-    useEffect(() =>{
-        //fetch data from API, but it will be a placeholder for now
-        for(let i = 0, len = 3; i < len; i++){
-            <DisplayCard image={PokemonHomePageImage}></DisplayCard> //PLACEHOLDER IMAGE!!!
-        }
-    }, [])
-
     return(
-        <>
-        </>
+        <div className="HomePage">
+            <div className="HomePage__Header">
+                <h1 className="HomePage__Header--Title">Welcome to the Pokémon Tracker! </h1>
+                <p>This is a small SERN stack project where</p>
+                <p>you can add pokemon to your account, change their descriptions,</p>
+                <p>and view all the pokemon you AND OTHERS have in your collection.</p>
+            </div>
+        </div>
     );
 }
