@@ -10,7 +10,7 @@ export default function CreatePage(){
             const form = pokemonForm.target;
             const pokemonName = form.name.value;
             const pokemonDescription = form.description.value; 
-            const response = await fetch("/api/addPokemon", {
+            const response = await fetch("http://localhost:8080/api/addPokemon", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
