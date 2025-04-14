@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { defaultImage } from '../assets/PokemonHomepage.png'
+import  PokemonHomePageImage  from "../assets/PokemonHomepage.png"
 
 export default function DisplayCard(props){
     const [cardImage, setCardImage] = useState();
@@ -13,7 +13,7 @@ export default function DisplayCard(props){
             }
             catch(err){
                 console.log("Error fetching image, or more specifically: " +err);
-                setCardImage(defaultImage);
+                setCardImage(PokemonHomePageImage);
             }
         })
         fetchImage();

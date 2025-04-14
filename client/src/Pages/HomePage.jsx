@@ -1,4 +1,4 @@
-import { PokemonHomePageImage } from "../assets/PokemonHomePageImage.png"
+import  PokemonHomePageImage  from "../assets/PokemonHomepage.png"
 export default function HomePage() {
     return(
         <div className="HomePage">
@@ -7,7 +7,9 @@ export default function HomePage() {
                 <p>This is a small SERN stack project where</p>
                 <p>you can add pokemon to your account, change their descriptions,</p>
                 <p>and view all the pokemon you AND OTHERS have in your collection.</p>
+                <img src={PokemonHomePageImage} />
             </div>
+            
         </div>
     );
 }
