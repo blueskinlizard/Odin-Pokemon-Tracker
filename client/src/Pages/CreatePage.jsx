@@ -18,7 +18,7 @@ export default function CreatePage(){
                 body: JSON.stringify({ pokemon: pokemonName, pokemonDescription: pokemonDescription}),
             })
             const result = await response.json();
-            if(response.ok){
+            if(response.ok){    
                 console.log("Pokemon Successfully added, more specifically: ", result.message);
             }
             else{

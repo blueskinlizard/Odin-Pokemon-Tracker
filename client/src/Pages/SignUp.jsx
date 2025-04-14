@@ -22,8 +22,9 @@ export default function SignUp(){
                 const result = await response.json();
                 if(response.ok){
                     console.log("Profile Successfully added, more specifically: ", result.message);
+                    console.log("Fetching current user..");
                     try {
-                        const userResponse = await fetch("http://localhost:8080/api/login/currentUser", { //API call for username, for react context purposes
+                        const userResponse = await fetch("http://localhost:8080/api/currentuser", { //API call for username, for react context purposes
                             method: "GET",
                             credentials: "include", 
                         });
@@ -48,11 +49,22 @@ export default function SignUp(){
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({ username: profileName, password: profilePassword}),
             })
             const result = await response.json();
             if(response.ok){
                 console.log("Succesfully logged in, more specifically: ", result.message);
+                try {
+                    const userResponse = await fetch("http://localhost:8080/api/currentuser", { //API call for username, for react context purposes
+                        method: "GET",
+                        credentials: "include", 
+                    });
+                    const userData = await userResponse.json();
+                    console.log("Logged in user:", userData.username);
+                } catch (err) {
+                    console.error("Error getting logged-in user:", err);
+                }
             }
             else{
                 console.log("Error occured in logging in, response !=ok, error: ", result.message)

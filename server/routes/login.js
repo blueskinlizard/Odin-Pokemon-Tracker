@@ -11,7 +11,7 @@ router.post("/login", async (req, res)=>{ //login with existing account
         // DO NOT STORE YOUR REAL LIFE LOGIN INFO ON MY SITE!!!!
         if (retrievedPassword === password) {
             req.session.username = username;
-            res.json({ message: "Login successful" });
+            res.json({ message: "Logged in as: " + req.session.username });
         }
         else{
             return res.status(401).json({ message: "Invalid credentials" });
@@ -22,8 +22,9 @@ router.post("/login", async (req, res)=>{ //login with existing account
     }
     
 })
-router.get("/currentUser", async (req, res) =>{ //Listen, I know this is a "login" API, but I'm also including a "get current user" API because I'm lazy and don't want to make a separate file for it
+router.get("/currentuser", async (req, res) =>{ //Listen, I know this is a "login" API, but I'm also including a "get current user" API because I'm lazy and don't want to make a separate file for it
     try{
+        console.log("/currentUser called, session username:", req.session.username);
         const username = req.session.username;
         return res.json({ username });
     }
