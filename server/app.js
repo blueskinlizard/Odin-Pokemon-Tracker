@@ -9,16 +9,15 @@ const loginRoutes = require('./routes/login');
 const pokemonRoutes = require('./routes/pokemonBackend');
 
 app.use(cors({
-  origin: 'http://localhost:5173',  // Adjust this to match your frontend's URL
+  origin: 'http://localhost:5173',  
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true // If you need cookies or authorization headers to be included
+  credentials: true 
 }));
 
 app.use(express.json());
 
-// Ensure session middleware comes before routes
 app.use(session({
-  secret: process.env.SESSION_SECRET,  // Ensure this uses the correct env variable
+  secret: process.env.SESSION_SECRET,  
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }

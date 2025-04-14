@@ -43,7 +43,7 @@ router.post("/signup", async (req, res)=>{
         }
         await db.addUser(username, password);
         req.session.username = username; 
-        return res.status(201).json({ message: "Logged in as: " + username });
+        return res.status(201).json({ message: "Logged in as: " + req.session.username });
     }
     catch(err){
         console.error(err);
