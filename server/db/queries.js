@@ -46,6 +46,16 @@ async function getPokemonDescription(pokemonToRetrieve, username){
     }
     return null;
 }
+
+async function removePokemon(username, pokemonToRemove) {
+    try{
+        await pool.query("DELETE FROM pokemon_descriptions WHERE username = $1 AND pokemonname = $2", [username, pokemonToRemove]);
+        await pool.query("UPDATE uservalues SET pokemonOwned =  array_remove(pokemonOwned, $2) WHERE username = $1", [username, pokemonToRemove]);
+    }
+    catch(err){
+        console.log("Error removing pokemon from database:", err);
+    }
+}
 async function addUser(username, password){
     await pool.query("INSERT INTO userValues (username, userpassword) VALUES ($1, $2)", [username, password]);
 }
@@ -73,6 +83,8 @@ async function insertPokemonAttribute(pokemonToAdd, pokemonName){
     await pool.query("INSERT INTO pokemon_attributes (pokemonToAdd, pokemonName) VALUES ($1, $2)", [pokemonToAdd, pokemonName]);
 }
 
+
+
 module.exports = {
     getAllPokemon,
     addPokemonUser,
@@ -82,7 +94,8 @@ module.exports = {
     insertPokemonAttribute,
     getUser,
     addUser,
-    changePokemonDescription
+    changePokemonDescription,
+    removePokemon
 }
 //idea is that we enter the pokemon name on the fontend, which react will try to fetch from pokemon API.
 // When fetched, we will set an image component along with the user inputted description.

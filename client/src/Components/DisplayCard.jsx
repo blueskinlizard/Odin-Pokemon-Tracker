@@ -19,12 +19,29 @@ export default function DisplayCard(props){
         fetchImage();
     }, [props.name])
 
+    const removePokemonFunction = (async() =>{
+        try{
+            await fetch("http://localhost:8080/api/removePokemon", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify({ pokemonToRemove: props.name}),
+            })
+            window.location.reload();
+        }
+        catch(err){
+            console.log("Error in fetching pokemon, " + err);
+        }
+    })
     //PLACEHOLDER FOR NOW
     return(
         <div className="card">
             <img src={cardImage} alt="image"/>
-            <h1>{props.name}</h1>
+            <h3>{props.name}</h3>
             <p>{props.description}</p>
+            <button onClick={removePokemonFunction}>Remove Pokemon</button>
         </div>
     )
 }

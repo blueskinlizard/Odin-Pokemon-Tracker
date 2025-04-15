@@ -28,6 +28,18 @@ router.get("/pokemonDescription/:username/:pokemonToFetch", async(req, res) =>{
         console.log("Caught backend error in fetchPokemonDescription: ", err);
     }
 })
+router.post("/removePokemon", async(req, res)=>{
+    try{
+        const { pokemonToRemove } = req.body;
+        console.log("Session username before deleting pokemon: ", req.session.username);
+        const username = req.session.username;
+        await db.removePokemon(username, pokemonToRemove);
+        return res.status(201).json("Pokemon Removed Successfully");
+    }
+    catch(err){
+        console.log("Pokemon Removal Error: ", err);
+    }
+})
 router.post("/addPokemon", async (req,res) =>{
         console.log("Session username before adding pokemon:", req.session.username);
         if (!req.session.username) {
