@@ -19,9 +19,9 @@ router.get("/pokemonDescription/:username/:pokemonToFetch", async(req, res) =>{
         const { username, pokemonToFetch} = req.params;
         const pokemonDescription = await db.getPokemonDescription(pokemonToFetch, username);
         if (!pokemonDescription) {
-            return res.status(404).json({ error: "Description not found" });
+            return res.status(404).json({ message: "Description Not Found" });
         }
-        return res.json({ description: pokemonDescription }); 
+        return res.json({ pokemonDescription }); 
 
     }
     catch(err){

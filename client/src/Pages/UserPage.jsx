@@ -18,20 +18,20 @@ export default function UserPage(){
         fetchUserPokemon();
     }, [user]);
     
-    // useEffect(() => { //Fetches pokemon description
-    //     const fetchUserDescriptions = async () => {
-    //         if (userPokemon.length === 0) return;
-    //         console.log("Fetching descriptions...");
-    //         const descriptionPromises = userPokemon.map(async (pokemon) => {
-    //             const response = await fetch(`http://localhost:8080/api/pokemonDescription/${user}/${pokemon}`);
-    //             const data = await response.json();
-    //             return data;
-    //         });
-    //         const descriptions = await Promise.all(descriptionPromises);
-    //         setPokemonDescriptions(descriptions);
-    //     };
-    //     fetchUserDescriptions();
-    // }, [userPokemon, user]);
+    useEffect(() => { //Fetches pokemon description
+        const fetchUserDescriptions = async () => {
+            if (userPokemon.length === 0) return;
+            console.log("Fetching descriptions...");
+            const descriptionPromises = userPokemon.map(async (pokemon) => {
+                const response = await fetch(`http://localhost:8080/api/pokemonDescription/${user}/${pokemon}`);
+                const data = await response.json();
+                return data.pokemonDescription;
+            });
+            const descriptions = await Promise.all(descriptionPromises);
+            setPokemonDescriptions(descriptions);
+        };
+        fetchUserDescriptions();
+    }, [userPokemon, user]);
     
     return(
         <div>
@@ -40,8 +40,7 @@ export default function UserPage(){
             userPokemon.map((pokemon, index) =>{
                 console.log("Pokemon Name: " +pokemon)
                 return(
-                    <DisplayCard key={pokemon} name={pokemon}/>
-                    //description={pokemonDescriptions[index]}
+                    <DisplayCard key={pokemon} name={pokemon} description={pokemonDescriptions[index]}/>
                 )   
             })
         }

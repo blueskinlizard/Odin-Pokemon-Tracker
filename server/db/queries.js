@@ -40,9 +40,9 @@ async function changePokemonDescription(pokemonToChange, description, username) 
 }
 
 async function getPokemonDescription(pokemonToRetrieve, username){
-    const  pokemonDescription  = await pool.query("SELECT pokemonDescription FROM pokemon_descriptions WHERE username = $1 AND pokemonName = $2", [username, pokemonToRetrieve]);
+    const pokemonDescription = await pool.query("SELECT * FROM pokemon_descriptions WHERE username = $1 AND pokemonname = $2",  [username, pokemonToRetrieve]);
     if (pokemonDescription.rows.length > 0) {
-        return pokemonDescription.rows[0].pokemonDescription; 
+        return pokemonDescription.rows[0].pokemondescription; 
     }
     return null;
 }
