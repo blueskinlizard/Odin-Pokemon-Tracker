@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { db } = require("../db/queries")
+const  db  = require("../db/queries")
 const session = require("express-session");
 //this file serves as a rest API for fetching and adding Pokemon Info
 router.get("/getPokemon/:username", async (req,res) =>{
