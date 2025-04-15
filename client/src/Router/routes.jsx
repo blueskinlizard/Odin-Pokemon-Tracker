@@ -9,7 +9,7 @@ const routes = [
         element: <App></App>
     },
     {
-        path: '/users/:userid',
+        path: '/users/:user',
         element: <UserPage></UserPage>
     },
     {

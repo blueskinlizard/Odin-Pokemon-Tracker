@@ -6,9 +6,9 @@ export default function DisplayCard(props){
     useEffect(() =>{ //fetches images to corresponding pokemon provided
         const fetchImage = (async() =>{
             try{
-                const imageSource = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.name.toLowerCase()}`)
+                const imageSource = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.name}`)
                 const data = await imageSource.json();
-                const image = data.sprits.front_default;
+                const image = data.sprites.front_default;
                 setCardImage(image);
             }
             catch(err){

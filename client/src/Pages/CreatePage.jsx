@@ -11,7 +11,7 @@ export default function CreatePage(){
             const pokemonName = form.name.value;
             const pokemonDescription = form.description.value; 
             const response = await fetch("http://localhost:8080/api/addPokemon", {
-                method: "POST",
+                method: "POST", 
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -20,7 +20,7 @@ export default function CreatePage(){
             })
             const result = await response.json();
             if(response.ok){    
-                console.log("Pokemon Successfully added, more specifically: ", result.message);
+                console.log("Pokemon Successfully added");
             }
             else{
                 console.log("Error occured in adding pokemon, response !=ok, error: ", result.message)
