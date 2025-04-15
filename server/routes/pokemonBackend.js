@@ -23,19 +23,20 @@ router.get("/pokemonDescription/:username/:pokemonToFetch", async(req, res) =>{
     catch{}
 })
 router.post("/addPokemon", async (req,res) =>{
-    try{
-        const { pokemon, pokemonDescription } = req.body; //username is provided by React Context hook
+        console.log("Session username before adding pokemon:", req.session.username);
+        if (!req.session.username) {
+            console.log("No session username found");
+            return res.status(401).json({ message: "User not logged in" });
+        }
+        const { pokemon, pokemonDescription } = req.body; 
         if (!pokemon || !pokemonDescription) {
             return res.status(400).json({ error: "Missing required fields: 'pokemon' or 'pokemonDescription'" });
           }
-        await db.addPokemonUser(pokemon, req.session.username); //this adds the base pokemon to userValues database table
+        await db.addPokemonUser(pokemon, req.session.username); //ERROR LIKELY HERE, PARAMETERS ARE CAUSING UNDEFINED RETURN ERROR
         console.log("Added Pokemon(s): "+pokemon+"to user:" + req.session.username);
         await db.setPokemonDescription(pokemon, pokemonDescription, req.session.username); //this adds the description to the pokemon_descriptions database table
         return res.status(201).json("Pokemon added")
-    }
-    catch(err){
-        return res.status(401).json("Error adding Pokemon");
-    }
+    
 })
 
 module.exports = router;

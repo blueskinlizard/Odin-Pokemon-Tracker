@@ -1,6 +1,7 @@
 import App from "../Pages/App";
 import UserPage from "../Pages/UserPage";
 import SignUp from "../Pages/SignUp";
+import CreatePage from "../Pages/CreatePage";
 
 const routes = [
     {
@@ -14,7 +15,12 @@ const routes = [
     {
         path: '/signup',
         element: <SignUp></SignUp>
-    }
+    },
+    {
+        path: '/create',
+        element: <CreatePage></CreatePage>
+    },
+
 ]
 
 export default routes;

@@ -15,6 +15,7 @@ export default function CreatePage(){
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({ pokemon: pokemonName, pokemonDescription: pokemonDescription}),
             })
             const result = await response.json();

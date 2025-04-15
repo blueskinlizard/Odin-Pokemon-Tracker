@@ -20,7 +20,11 @@ async function getAllPokemon(username){
 }
 
 async function addPokemonUser(pokemonToAdd, username) {
-    await pool.query("UPDATE uservalues SET pokemonOwned = array_append(pokemonOwned, $1) WHERE username = $2", [pokemonToAdd, username]);
+    try{
+        await pool.query("UPDATE uservalues SET pokemonOwned = array_append(pokemonOwned, $1) WHERE username = $2", [pokemonToAdd, username]);
+    }catch(err){
+        console.log("Error adding pokemon to database, "+err)
+    }
 }
 
 async function setPokemonDescription(pokemonToChange, description, username) {

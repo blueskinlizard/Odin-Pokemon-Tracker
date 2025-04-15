@@ -20,8 +20,17 @@ app.use(session({
   secret: process.env.SESSION_SECRET,  
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: {
+    secure: false, 
+    sameSite: "lax" 
+  }
 }));
+
+app.use((req, res, next) => {
+  console.log("Session ID:", req.sessionID);
+  console.log("Username in session:", req.session.username);
+  next();
+});
 
 app.use("/api", loginRoutes);
 app.use("/api", pokemonRoutes);

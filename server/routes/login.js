@@ -11,7 +11,9 @@ router.post("/login", async (req, res)=>{ //login with existing account
         // DO NOT STORE YOUR REAL LIFE LOGIN INFO ON MY SITE!!!!
         if (retrievedPassword === password) {
             req.session.username = username;
-            res.json({ message: "Logged in as: " + req.session.username });
+            
+            return res.json({ message: "Logged in as: " + req.session.username });
+
         }
         else{
             return res.status(401).json({ message: "Invalid credentials" });
@@ -44,7 +46,9 @@ router.post("/signup", async (req, res)=>{
         }
         await db.addUser(username, password);
         req.session.username = username; 
-        return res.status(201).json({ message: "Logged in as: " + req.session.username });
+        req.session.save(() => {
+            res.status(201).json({ message: "Logged in as: " + req.session.username });
+        });
     }
     catch(err){
         console.error(err);
