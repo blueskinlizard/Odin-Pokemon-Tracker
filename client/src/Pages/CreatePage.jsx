@@ -1,15 +1,31 @@
 //This page is meant for adding a new pokemon to a user's database
 
-export default function CreatePage(){
+import { useState } from "react";
 
+export default function CreatePage(){
+    const [pokemonAlert, setPokemonAlert] = useState(null);
     const addToDatabase = (async (pokemonForm) =>{
+        
         pokemonForm.preventDefault();
         
         //This function is meant to add a new pokemon to the user's database
         try{
             const form = pokemonForm.target;
             const pokemonName = form.name.value;
+            try{
+                const checkIfPokemonExists = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+                if(!checkIfPokemonExists.ok){
+                    setPokemonAlert("Pokemon does not exist, please try again");
+                    return;
+                }
+                setPokemonAlert("Pokemon exists! Adding to database")
+            }
+            catch(err){
+                setPokemonAlert("Error checking pokemon: ", err);
+            }
             const pokemonDescription = form.description.value; 
+
+
             const response = await fetch("http://localhost:8080/api/addPokemon", {
                 method: "POST", 
                 headers: {
@@ -40,6 +56,7 @@ export default function CreatePage(){
                 <label> Description: </label>
                 <textarea name="description" placeholder="Enter a brief description of the Pokémon"/>
                 <button type="submit" className="CreatePokemonButton">Create</button>
+                <h3>{pokemonAlert}</h3>
             </form>
         </div>
     )
