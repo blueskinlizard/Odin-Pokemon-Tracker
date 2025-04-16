@@ -4,11 +4,11 @@ A small full-stack project built with the **SERN stack** (SQL, Express, React, N
 
 ## 🔧 Features
 
-- 🔐 User account creation
+- 🔐 (Unsecure)User account creation
 - ❤️ Store and retrieve favorite Pokémon for each account
 - 🌐 RESTful API for all backend operations
 - 📦 PostgreSQL as the relational database
-- ⚛️ React frontend with clean UI
+- ⚛️ React frontend
 - 🔄 Secure communication between frontend and backend
 
 ## 🛠 Tech Stack
