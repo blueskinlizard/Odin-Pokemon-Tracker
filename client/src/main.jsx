@@ -5,11 +5,8 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './Pages/App.jsx'
 import routes from './Router/routes.jsx'
-import WebsiteContext from './Management/WebsiteContext.jsx'
 
 const router = createBrowserRouter(routes);
 createRoot(document.getElementById('root')).render(
-  <WebsiteContext>
     <RouterProvider router={router} />
-  </WebsiteContext>
 )

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import WebsiteProvider from "../Management/WebsiteContext";
 import { useParams } from "react-router-dom";
 import DisplayCard from "../Components/DisplayCard";
 //We are displaying the user's pokemon on their profile page
