@@ -24,7 +24,7 @@ export default function SignUp(){
                     console.log("Profile Successfully added, more specifically: ", result.message);
                     console.log("Fetching current user..");
                     try {
-                        const userResponse = await fetch("http://localhost:8080/api/currentuser", { //API call for username, for react context purposes
+                        const userResponse = await fetch("http://localhost:8080/api/currentuser", { 
                             method: "GET",
                             credentials: "include", 
                         });
@@ -56,8 +56,7 @@ export default function SignUp(){
             if(response.ok){
                 console.log("Succesfully logged in, more specifically: ", result.message);
                 try {
-                    const userResponse = await fetch("http://localhost:8080/api/currentuser", { //API call for username, for react context purposes
-                        method: "GET",
+                    const userResponse = await fetch("http://localhost:8080/api/currentuser", { 
                         credentials: "include", 
                     });
                     const userData = await userResponse.json();
